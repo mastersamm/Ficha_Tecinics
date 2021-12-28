@@ -1,0 +1,12 @@
+D:\source\repos\FichaTecnicaServer\FichaTecnicaServer\bin\Debug\FichaTecnicaServer.exe.config
+D:\source\repos\FichaTecnicaServer\FichaTecnicaServer\bin\Debug\FichaTecnicaServer.exe
+D:\source\repos\FichaTecnicaServer\FichaTecnicaServer\bin\Debug\FichaTecnicaServer.pdb
+D:\source\repos\FichaTecnicaServer\FichaTecnicaServer\bin\Debug\EntityFramework.dll
+D:\source\repos\FichaTecnicaServer\FichaTecnicaServer\bin\Debug\EntityFramework.SqlServer.dll
+D:\source\repos\FichaTecnicaServer\FichaTecnicaServer\bin\Debug\EntityFramework.xml
+D:\source\repos\FichaTecnicaServer\FichaTecnicaServer\bin\Debug\EntityFramework.SqlServer.xml
+D:\source\repos\FichaTecnicaServer\FichaTecnicaServer\obj\Debug\FichaTecnicaServer.csproj.AssemblyReference.cache
+D:\source\repos\FichaTecnicaServer\FichaTecnicaServer\obj\Debug\FichaTecnicaServer.csproj.CoreCompileInputs.cache
+D:\source\repos\FichaTecnicaServer\FichaTecnicaServer\obj\Debug\FichaTecnicaServer.csproj.CopyComplete
+D:\source\repos\FichaTecnicaServer\FichaTecnicaServer\obj\Debug\FichaTecnicaServer.exe
+D:\source\repos\FichaTecnicaServer\FichaTecnicaServer\obj\Debug\FichaTecnicaServer.pdb

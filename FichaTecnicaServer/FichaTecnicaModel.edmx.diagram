@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="190caba072be4424a299235f05217ade" Name="Diagram1">
+        <EntityTypeShape EntityType="FichaTecnicaModel.AnalisisServer" Width="1.5" PointX="0.75" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FichaTecnicaModel.CarpetasCompartidas" Width="1.5" PointX="3" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="FichaTecnicaModel.Datos_de_la_red" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FichaTecnicaModel.DatosTecnicos" Width="1.5" PointX="3" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FichaTecnicaModel.DB" Width="1.5" PointX="3" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="FichaTecnicaModel.Particiones" Width="1.5" PointX="3" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FichaTecnicaModel.Software_instalado" Width="1.5" PointX="3" PointY="16.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FichaTecnicaModel.Updates" Width="1.5" PointX="3" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FichaTecnicaModel.Usuarios" Width="1.5" PointX="3" PointY="21.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FichaTecnicaModel.RespaldosDB" Width="1.5" PointX="3" PointY="23.875" IsExpanded="true" />
+        <AssociationConnector Association="FichaTecnicaModel.FK_CarpetasCompartidas_AnalisisServer" ManuallyRouted="false" />
+        <AssociationConnector Association="FichaTecnicaModel.FK_Datos_de_la_red_AnalisisServer" ManuallyRouted="false" />
+        <AssociationConnector Association="FichaTecnicaModel.FK_DatosTecnicos_AnalisisServer" ManuallyRouted="false" />
+        <AssociationConnector Association="FichaTecnicaModel.FK_DB_AnalisisServer" ManuallyRouted="false" />
+        <AssociationConnector Association="FichaTecnicaModel.FK_DB_AnalisisServer1" ManuallyRouted="false" />
+        <AssociationConnector Association="FichaTecnicaModel.FK_Particiones_AnalisisServer" ManuallyRouted="false" />
+        <AssociationConnector Association="FichaTecnicaModel.FK_RespaldosDB_AnalisisServer" ManuallyRouted="false" />
+        <AssociationConnector Association="FichaTecnicaModel.FK_Software_instalado_AnalisisServer" ManuallyRouted="false" />
+        <AssociationConnector Association="FichaTecnicaModel.FK_Updates_AnalisisServer" ManuallyRouted="false" />
+        <AssociationConnector Association="FichaTecnicaModel.FK_Usuarios_AnalisisServer" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

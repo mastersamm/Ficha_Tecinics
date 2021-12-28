@@ -1,0 +1,695 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="FichaTecnicaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AnalisisServer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="FechaDeEjecucion" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CarpetasCompartidas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id_AnalisisServer" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Datos_de_la_red">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_AnalisisServer" Type="int" Nullable="false" />
+          <Property Name="ip_adress" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="DatosTecnicos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_AnalisisServer" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" />
+          <Property Name="Procesador" Type="varchar" MaxLength="100" />
+          <Property Name="Modelo" Type="varchar" MaxLength="100" />
+          <Property Name="Velocidad" Type="varchar" MaxLength="100" />
+          <Property Name="RAM" Type="varchar" MaxLength="100" />
+          <Property Name="TipoDSistema" Type="varchar" MaxLength="100" />
+          <Property Name="Dominio" Type="varchar" MaxLength="100" />
+          <Property Name="Edicion_Windows" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="DB">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_AnalisisServer" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Particiones">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_AnalisisServer" Type="int" />
+          <Property Name="Disco" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Ficha_Tecnica.dbo.RespaldosDB' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="RespaldosDB">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Id_AnalisisServer" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id_AnalisisServer" Type="int" Nullable="false" />
+          <Property Name="Base" Type="varchar" MaxLength="50" />
+          <Property Name="Ubicacion" Type="varchar" MaxLength="50" />
+          <Property Name="Fecha" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Software_instalado">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_AnalisisServer" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Updates">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_AnalisisServer" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_AnalisisServer" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_CarpetasCompartidas_AnalisisServer">
+          <End Role="AnalisisServer" Type="Self.AnalisisServer" Multiplicity="1" />
+          <End Role="CarpetasCompartidas" Type="Self.CarpetasCompartidas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AnalisisServer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CarpetasCompartidas">
+              <PropertyRef Name="Id_AnalisisServer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Datos_de_la_red_AnalisisServer">
+          <End Role="AnalisisServer" Type="Self.AnalisisServer" Multiplicity="1" />
+          <End Role="Datos_de_la_red" Type="Self.Datos_de_la_red" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AnalisisServer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Datos_de_la_red">
+              <PropertyRef Name="Id_AnalisisServer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DatosTecnicos_AnalisisServer">
+          <End Role="AnalisisServer" Type="Self.AnalisisServer" Multiplicity="1" />
+          <End Role="DatosTecnicos" Type="Self.DatosTecnicos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AnalisisServer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DatosTecnicos">
+              <PropertyRef Name="Id_AnalisisServer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DB_AnalisisServer">
+          <End Role="AnalisisServer" Type="Self.AnalisisServer" Multiplicity="1" />
+          <End Role="DB" Type="Self.DB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AnalisisServer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DB">
+              <PropertyRef Name="Id_AnalisisServer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DB_AnalisisServer1">
+          <End Role="AnalisisServer" Type="Self.AnalisisServer" Multiplicity="1" />
+          <End Role="DB" Type="Self.DB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AnalisisServer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DB">
+              <PropertyRef Name="Id_AnalisisServer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Particiones_AnalisisServer">
+          <End Role="AnalisisServer" Type="Self.AnalisisServer" Multiplicity="0..1" />
+          <End Role="Particiones" Type="Self.Particiones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AnalisisServer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Particiones">
+              <PropertyRef Name="Id_AnalisisServer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RespaldosDB_AnalisisServer">
+          <End Role="AnalisisServer" Type="Self.AnalisisServer" Multiplicity="1" />
+          <End Role="RespaldosDB" Type="Self.RespaldosDB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AnalisisServer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RespaldosDB">
+              <PropertyRef Name="Id_AnalisisServer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Software_instalado_AnalisisServer">
+          <End Role="AnalisisServer" Type="Self.AnalisisServer" Multiplicity="1" />
+          <End Role="Software_instalado" Type="Self.Software_instalado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AnalisisServer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Software_instalado">
+              <PropertyRef Name="id_AnalisisServer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Updates_AnalisisServer">
+          <End Role="AnalisisServer" Type="Self.AnalisisServer" Multiplicity="1" />
+          <End Role="Updates" Type="Self.Updates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AnalisisServer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Updates">
+              <PropertyRef Name="Id_AnalisisServer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuarios_AnalisisServer">
+          <End Role="AnalisisServer" Type="Self.AnalisisServer" Multiplicity="1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AnalisisServer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="Id_AnalisisServer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FichaTecnicaModelStoreContainer">
+          <EntitySet Name="AnalisisServer" EntityType="Self.AnalisisServer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CarpetasCompartidas" EntityType="Self.CarpetasCompartidas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Datos_de_la_red" EntityType="Self.Datos_de_la_red" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DatosTecnicos" EntityType="Self.DatosTecnicos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DB" EntityType="Self.DB" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Particiones" EntityType="Self.Particiones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Software_instalado" EntityType="Self.Software_instalado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Updates" EntityType="Self.Updates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RespaldosDB" EntityType="Self.RespaldosDB" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [RespaldosDB].[Id] AS [Id], 
+    [RespaldosDB].[Id_AnalisisServer] AS [Id_AnalisisServer], 
+    [RespaldosDB].[Base] AS [Base], 
+    [RespaldosDB].[Ubicacion] AS [Ubicacion], 
+    [RespaldosDB].[Fecha] AS [Fecha]
+    FROM [dbo].[RespaldosDB] AS [RespaldosDB]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_CarpetasCompartidas_AnalisisServer" Association="Self.FK_CarpetasCompartidas_AnalisisServer">
+            <End Role="AnalisisServer" EntitySet="AnalisisServer" />
+            <End Role="CarpetasCompartidas" EntitySet="CarpetasCompartidas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Datos_de_la_red_AnalisisServer" Association="Self.FK_Datos_de_la_red_AnalisisServer">
+            <End Role="AnalisisServer" EntitySet="AnalisisServer" />
+            <End Role="Datos_de_la_red" EntitySet="Datos_de_la_red" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DatosTecnicos_AnalisisServer" Association="Self.FK_DatosTecnicos_AnalisisServer">
+            <End Role="AnalisisServer" EntitySet="AnalisisServer" />
+            <End Role="DatosTecnicos" EntitySet="DatosTecnicos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DB_AnalisisServer" Association="Self.FK_DB_AnalisisServer">
+            <End Role="AnalisisServer" EntitySet="AnalisisServer" />
+            <End Role="DB" EntitySet="DB" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DB_AnalisisServer1" Association="Self.FK_DB_AnalisisServer1">
+            <End Role="AnalisisServer" EntitySet="AnalisisServer" />
+            <End Role="DB" EntitySet="DB" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Particiones_AnalisisServer" Association="Self.FK_Particiones_AnalisisServer">
+            <End Role="AnalisisServer" EntitySet="AnalisisServer" />
+            <End Role="Particiones" EntitySet="Particiones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RespaldosDB_AnalisisServer" Association="Self.FK_RespaldosDB_AnalisisServer">
+            <End Role="AnalisisServer" EntitySet="AnalisisServer" />
+            <End Role="RespaldosDB" EntitySet="RespaldosDB" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Software_instalado_AnalisisServer" Association="Self.FK_Software_instalado_AnalisisServer">
+            <End Role="AnalisisServer" EntitySet="AnalisisServer" />
+            <End Role="Software_instalado" EntitySet="Software_instalado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Updates_AnalisisServer" Association="Self.FK_Updates_AnalisisServer">
+            <End Role="AnalisisServer" EntitySet="AnalisisServer" />
+            <End Role="Updates" EntitySet="Updates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuarios_AnalisisServer" Association="Self.FK_Usuarios_AnalisisServer">
+            <End Role="AnalisisServer" EntitySet="AnalisisServer" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FichaTecnicaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AnalisisServer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FechaDeEjecucion" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="CarpetasCompartidas" Relationship="Self.FK_CarpetasCompartidas_AnalisisServer" FromRole="AnalisisServer" ToRole="CarpetasCompartidas" />
+          <NavigationProperty Name="Datos_de_la_red" Relationship="Self.FK_Datos_de_la_red_AnalisisServer" FromRole="AnalisisServer" ToRole="Datos_de_la_red" />
+          <NavigationProperty Name="DatosTecnicos" Relationship="Self.FK_DatosTecnicos_AnalisisServer" FromRole="AnalisisServer" ToRole="DatosTecnicos" />
+          <NavigationProperty Name="DB" Relationship="Self.FK_DB_AnalisisServer" FromRole="AnalisisServer" ToRole="DB" />
+          <NavigationProperty Name="DB1" Relationship="Self.FK_DB_AnalisisServer1" FromRole="AnalisisServer" ToRole="DB" />
+          <NavigationProperty Name="Particiones" Relationship="Self.FK_Particiones_AnalisisServer" FromRole="AnalisisServer" ToRole="Particiones" />
+          <NavigationProperty Name="RespaldosDB" Relationship="Self.FK_RespaldosDB_AnalisisServer" FromRole="AnalisisServer" ToRole="RespaldosDB" />
+          <NavigationProperty Name="Software_instalado" Relationship="Self.FK_Software_instalado_AnalisisServer" FromRole="AnalisisServer" ToRole="Software_instalado" />
+          <NavigationProperty Name="Updates" Relationship="Self.FK_Updates_AnalisisServer" FromRole="AnalisisServer" ToRole="Updates" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK_Usuarios_AnalisisServer" FromRole="AnalisisServer" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="CarpetasCompartidas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id_AnalisisServer" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AnalisisServer" Relationship="Self.FK_CarpetasCompartidas_AnalisisServer" FromRole="CarpetasCompartidas" ToRole="AnalisisServer" />
+        </EntityType>
+        <EntityType Name="Datos_de_la_red">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_AnalisisServer" Type="Int32" Nullable="false" />
+          <Property Name="ip_adress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AnalisisServer" Relationship="Self.FK_Datos_de_la_red_AnalisisServer" FromRole="Datos_de_la_red" ToRole="AnalisisServer" />
+        </EntityType>
+        <EntityType Name="DatosTecnicos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_AnalisisServer" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Procesador" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Modelo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Velocidad" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="RAM" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TipoDSistema" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Dominio" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Edicion_Windows" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AnalisisServer" Relationship="Self.FK_DatosTecnicos_AnalisisServer" FromRole="DatosTecnicos" ToRole="AnalisisServer" />
+        </EntityType>
+        <EntityType Name="DB">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_AnalisisServer" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AnalisisServer" Relationship="Self.FK_DB_AnalisisServer" FromRole="DB" ToRole="AnalisisServer" />
+          <NavigationProperty Name="AnalisisServer1" Relationship="Self.FK_DB_AnalisisServer1" FromRole="DB" ToRole="AnalisisServer" />
+        </EntityType>
+        <EntityType Name="Particiones">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_AnalisisServer" Type="Int32" />
+          <Property Name="Disco" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AnalisisServer" Relationship="Self.FK_Particiones_AnalisisServer" FromRole="Particiones" ToRole="AnalisisServer" />
+        </EntityType>
+        <EntityType Name="Software_instalado">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_AnalisisServer" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AnalisisServer" Relationship="Self.FK_Software_instalado_AnalisisServer" FromRole="Software_instalado" ToRole="AnalisisServer" />
+        </EntityType>
+        <EntityType Name="Updates">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_AnalisisServer" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AnalisisServer" Relationship="Self.FK_Updates_AnalisisServer" FromRole="Updates" ToRole="AnalisisServer" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_AnalisisServer" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AnalisisServer" Relationship="Self.FK_Usuarios_AnalisisServer" FromRole="Usuarios" ToRole="AnalisisServer" />
+        </EntityType>
+        <EntityType Name="RespaldosDB">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Id_AnalisisServer" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id_AnalisisServer" Type="Int32" Nullable="false" />
+          <Property Name="Base" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Ubicacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="AnalisisServer" Relationship="Self.FK_RespaldosDB_AnalisisServer" FromRole="RespaldosDB" ToRole="AnalisisServer" />
+        </EntityType>
+        <Association Name="FK_CarpetasCompartidas_AnalisisServer">
+          <End Role="AnalisisServer" Type="Self.AnalisisServer" Multiplicity="1" />
+          <End Role="CarpetasCompartidas" Type="Self.CarpetasCompartidas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AnalisisServer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CarpetasCompartidas">
+              <PropertyRef Name="Id_AnalisisServer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Datos_de_la_red_AnalisisServer">
+          <End Role="AnalisisServer" Type="Self.AnalisisServer" Multiplicity="1" />
+          <End Role="Datos_de_la_red" Type="Self.Datos_de_la_red" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AnalisisServer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Datos_de_la_red">
+              <PropertyRef Name="Id_AnalisisServer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DatosTecnicos_AnalisisServer">
+          <End Role="AnalisisServer" Type="Self.AnalisisServer" Multiplicity="1" />
+          <End Role="DatosTecnicos" Type="Self.DatosTecnicos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AnalisisServer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DatosTecnicos">
+              <PropertyRef Name="Id_AnalisisServer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DB_AnalisisServer">
+          <End Role="AnalisisServer" Type="Self.AnalisisServer" Multiplicity="1" />
+          <End Role="DB" Type="Self.DB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AnalisisServer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DB">
+              <PropertyRef Name="Id_AnalisisServer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DB_AnalisisServer1">
+          <End Role="AnalisisServer" Type="Self.AnalisisServer" Multiplicity="1" />
+          <End Role="DB" Type="Self.DB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AnalisisServer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DB">
+              <PropertyRef Name="Id_AnalisisServer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Particiones_AnalisisServer">
+          <End Role="AnalisisServer" Type="Self.AnalisisServer" Multiplicity="0..1" />
+          <End Role="Particiones" Type="Self.Particiones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AnalisisServer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Particiones">
+              <PropertyRef Name="Id_AnalisisServer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RespaldosDB_AnalisisServer">
+          <End Role="AnalisisServer" Type="Self.AnalisisServer" Multiplicity="1" />
+          <End Role="RespaldosDB" Type="Self.RespaldosDB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AnalisisServer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RespaldosDB">
+              <PropertyRef Name="Id_AnalisisServer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Software_instalado_AnalisisServer">
+          <End Role="AnalisisServer" Type="Self.AnalisisServer" Multiplicity="1" />
+          <End Role="Software_instalado" Type="Self.Software_instalado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AnalisisServer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Software_instalado">
+              <PropertyRef Name="id_AnalisisServer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Updates_AnalisisServer">
+          <End Role="AnalisisServer" Type="Self.AnalisisServer" Multiplicity="1" />
+          <End Role="Updates" Type="Self.Updates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AnalisisServer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Updates">
+              <PropertyRef Name="Id_AnalisisServer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuarios_AnalisisServer">
+          <End Role="AnalisisServer" Type="Self.AnalisisServer" Multiplicity="1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AnalisisServer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="Id_AnalisisServer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FichaTecnicaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AnalisisServer" EntityType="Self.AnalisisServer" />
+          <EntitySet Name="CarpetasCompartidas" EntityType="Self.CarpetasCompartidas" />
+          <EntitySet Name="Datos_de_la_red" EntityType="Self.Datos_de_la_red" />
+          <EntitySet Name="DatosTecnicos" EntityType="Self.DatosTecnicos" />
+          <EntitySet Name="DB" EntityType="Self.DB" />
+          <EntitySet Name="Particiones" EntityType="Self.Particiones" />
+          <EntitySet Name="Software_instalado" EntityType="Self.Software_instalado" />
+          <EntitySet Name="Updates" EntityType="Self.Updates" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
+          <EntitySet Name="RespaldosDB" EntityType="Self.RespaldosDB" />
+          <AssociationSet Name="FK_CarpetasCompartidas_AnalisisServer" Association="Self.FK_CarpetasCompartidas_AnalisisServer">
+            <End Role="AnalisisServer" EntitySet="AnalisisServer" />
+            <End Role="CarpetasCompartidas" EntitySet="CarpetasCompartidas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Datos_de_la_red_AnalisisServer" Association="Self.FK_Datos_de_la_red_AnalisisServer">
+            <End Role="AnalisisServer" EntitySet="AnalisisServer" />
+            <End Role="Datos_de_la_red" EntitySet="Datos_de_la_red" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DatosTecnicos_AnalisisServer" Association="Self.FK_DatosTecnicos_AnalisisServer">
+            <End Role="AnalisisServer" EntitySet="AnalisisServer" />
+            <End Role="DatosTecnicos" EntitySet="DatosTecnicos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DB_AnalisisServer" Association="Self.FK_DB_AnalisisServer">
+            <End Role="AnalisisServer" EntitySet="AnalisisServer" />
+            <End Role="DB" EntitySet="DB" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DB_AnalisisServer1" Association="Self.FK_DB_AnalisisServer1">
+            <End Role="AnalisisServer" EntitySet="AnalisisServer" />
+            <End Role="DB" EntitySet="DB" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Particiones_AnalisisServer" Association="Self.FK_Particiones_AnalisisServer">
+            <End Role="AnalisisServer" EntitySet="AnalisisServer" />
+            <End Role="Particiones" EntitySet="Particiones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RespaldosDB_AnalisisServer" Association="Self.FK_RespaldosDB_AnalisisServer">
+            <End Role="AnalisisServer" EntitySet="AnalisisServer" />
+            <End Role="RespaldosDB" EntitySet="RespaldosDB" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Software_instalado_AnalisisServer" Association="Self.FK_Software_instalado_AnalisisServer">
+            <End Role="AnalisisServer" EntitySet="AnalisisServer" />
+            <End Role="Software_instalado" EntitySet="Software_instalado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Updates_AnalisisServer" Association="Self.FK_Updates_AnalisisServer">
+            <End Role="AnalisisServer" EntitySet="AnalisisServer" />
+            <End Role="Updates" EntitySet="Updates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuarios_AnalisisServer" Association="Self.FK_Usuarios_AnalisisServer">
+            <End Role="AnalisisServer" EntitySet="AnalisisServer" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FichaTecnicaModelStoreContainer" CdmEntityContainer="FichaTecnicaEntities">
+          <EntitySetMapping Name="AnalisisServer">
+            <EntityTypeMapping TypeName="FichaTecnicaModel.AnalisisServer">
+              <MappingFragment StoreEntitySet="AnalisisServer">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="FechaDeEjecucion" ColumnName="FechaDeEjecucion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CarpetasCompartidas">
+            <EntityTypeMapping TypeName="FichaTecnicaModel.CarpetasCompartidas">
+              <MappingFragment StoreEntitySet="CarpetasCompartidas">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Id_AnalisisServer" ColumnName="Id_AnalisisServer" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Datos_de_la_red">
+            <EntityTypeMapping TypeName="FichaTecnicaModel.Datos_de_la_red">
+              <MappingFragment StoreEntitySet="Datos_de_la_red">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Id_AnalisisServer" ColumnName="Id_AnalisisServer" />
+                <ScalarProperty Name="ip_adress" ColumnName="ip_adress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DatosTecnicos">
+            <EntityTypeMapping TypeName="FichaTecnicaModel.DatosTecnicos">
+              <MappingFragment StoreEntitySet="DatosTecnicos">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Id_AnalisisServer" ColumnName="Id_AnalisisServer" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Procesador" ColumnName="Procesador" />
+                <ScalarProperty Name="Modelo" ColumnName="Modelo" />
+                <ScalarProperty Name="Velocidad" ColumnName="Velocidad" />
+                <ScalarProperty Name="RAM" ColumnName="RAM" />
+                <ScalarProperty Name="TipoDSistema" ColumnName="TipoDSistema" />
+                <ScalarProperty Name="Dominio" ColumnName="Dominio" />
+                <ScalarProperty Name="Edicion_Windows" ColumnName="Edicion_Windows" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DB">
+            <EntityTypeMapping TypeName="FichaTecnicaModel.DB">
+              <MappingFragment StoreEntitySet="DB">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Id_AnalisisServer" ColumnName="Id_AnalisisServer" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Particiones">
+            <EntityTypeMapping TypeName="FichaTecnicaModel.Particiones">
+              <MappingFragment StoreEntitySet="Particiones">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Id_AnalisisServer" ColumnName="Id_AnalisisServer" />
+                <ScalarProperty Name="Disco" ColumnName="Disco" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Software_instalado">
+            <EntityTypeMapping TypeName="FichaTecnicaModel.Software_instalado">
+              <MappingFragment StoreEntitySet="Software_instalado">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="id_AnalisisServer" ColumnName="id_AnalisisServer" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Updates">
+            <EntityTypeMapping TypeName="FichaTecnicaModel.Updates">
+              <MappingFragment StoreEntitySet="Updates">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Id_AnalisisServer" ColumnName="Id_AnalisisServer" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="FichaTecnicaModel.Usuarios">
+              <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Id_AnalisisServer" ColumnName="Id_AnalisisServer" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RespaldosDB">
+            <EntityTypeMapping TypeName="FichaTecnicaModel.RespaldosDB">
+              <MappingFragment StoreEntitySet="RespaldosDB">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Id_AnalisisServer" ColumnName="Id_AnalisisServer" />
+                <ScalarProperty Name="Base" ColumnName="Base" />
+                <ScalarProperty Name="Ubicacion" ColumnName="Ubicacion" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

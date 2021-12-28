@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="FichaTecnicaModelStoreContainer" CdmEntityContainer="FichaTecnicaEntities">
+    <EntitySetMapping Name="AnalisisServer">
+      <EntityTypeMapping TypeName="FichaTecnicaModel.AnalisisServer">
+        <MappingFragment StoreEntitySet="AnalisisServer">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="FechaDeEjecucion" ColumnName="FechaDeEjecucion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CarpetasCompartidas">
+      <EntityTypeMapping TypeName="FichaTecnicaModel.CarpetasCompartidas">
+        <MappingFragment StoreEntitySet="CarpetasCompartidas">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Id_AnalisisServer" ColumnName="Id_AnalisisServer" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Datos_de_la_red">
+      <EntityTypeMapping TypeName="FichaTecnicaModel.Datos_de_la_red">
+        <MappingFragment StoreEntitySet="Datos_de_la_red">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Id_AnalisisServer" ColumnName="Id_AnalisisServer" />
+          <ScalarProperty Name="ip_adress" ColumnName="ip_adress" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DatosTecnicos">
+      <EntityTypeMapping TypeName="FichaTecnicaModel.DatosTecnicos">
+        <MappingFragment StoreEntitySet="DatosTecnicos">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Id_AnalisisServer" ColumnName="Id_AnalisisServer" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Procesador" ColumnName="Procesador" />
+          <ScalarProperty Name="Modelo" ColumnName="Modelo" />
+          <ScalarProperty Name="Velocidad" ColumnName="Velocidad" />
+          <ScalarProperty Name="RAM" ColumnName="RAM" />
+          <ScalarProperty Name="TipoDSistema" ColumnName="TipoDSistema" />
+          <ScalarProperty Name="Dominio" ColumnName="Dominio" />
+          <ScalarProperty Name="Edicion_Windows" ColumnName="Edicion_Windows" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DB">
+      <EntityTypeMapping TypeName="FichaTecnicaModel.DB">
+        <MappingFragment StoreEntitySet="DB">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Id_AnalisisServer" ColumnName="Id_AnalisisServer" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Particiones">
+      <EntityTypeMapping TypeName="FichaTecnicaModel.Particiones">
+        <MappingFragment StoreEntitySet="Particiones">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Id_AnalisisServer" ColumnName="Id_AnalisisServer" />
+          <ScalarProperty Name="Disco" ColumnName="Disco" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Software_instalado">
+      <EntityTypeMapping TypeName="FichaTecnicaModel.Software_instalado">
+        <MappingFragment StoreEntitySet="Software_instalado">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="id_AnalisisServer" ColumnName="id_AnalisisServer" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Updates">
+      <EntityTypeMapping TypeName="FichaTecnicaModel.Updates">
+        <MappingFragment StoreEntitySet="Updates">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Id_AnalisisServer" ColumnName="Id_AnalisisServer" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuarios">
+      <EntityTypeMapping TypeName="FichaTecnicaModel.Usuarios">
+        <MappingFragment StoreEntitySet="Usuarios">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Id_AnalisisServer" ColumnName="Id_AnalisisServer" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RespaldosDB">
+      <EntityTypeMapping TypeName="FichaTecnicaModel.RespaldosDB">
+        <MappingFragment StoreEntitySet="RespaldosDB">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Id_AnalisisServer" ColumnName="Id_AnalisisServer" />
+          <ScalarProperty Name="Base" ColumnName="Base" />
+          <ScalarProperty Name="Ubicacion" ColumnName="Ubicacion" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
